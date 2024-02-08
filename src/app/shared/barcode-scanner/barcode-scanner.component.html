@@ -1,0 +1,28 @@
+<div class="absolute top-0 left-0 w-full h-full bg-black">
+<zxing-scanner
+  #scanner
+  [autostart]="true"
+  [device]="currentCamera"
+  [formats]="allowedFormats"
+  [torch]="torch"
+  [tryHarder]="true"
+  (camerasFound)="camerasFoundHandler($event)"
+  (deviceChange)="onDeviceChange($event)"
+  (scanError)="scanErrorHandler($event)"
+  (scanSuccess)="scanSuccessHandler($event)"
+  (torchCompatible)="torchCompatibleHandler($event)"
+></zxing-scanner>
+
+<div class="absolute bottom-0 left-0 bg-slate-900 z-40 w-full grid place-items-center gap-4 p-2">
+  <!-- Botón para cerrar el escáner -->
+  <button class="text-white" type="button" (click)="close()">
+    <!-- Icono y texto para el botón -->
+  </button>
+  <!-- Selector de cámaras disponibles -->
+  <select (change)="onDeviceSelectChange($event)">
+    <option *ngFor="let camera of availableCameras" [value]="camera.deviceId">
+      {{ camera.label }}
+    </option>
+  </select>
+</div>
+</div>
